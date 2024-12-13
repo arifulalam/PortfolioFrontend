@@ -1,0 +1,42 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.dashboard{
+    display: flex;
+    height: 100vh;
+}
+
+.dashboard aside{
+    width: 20%;
+    max-width: 30%;
+    background-color: yellowgreen;
+    color: #000;
+    border-top-right-radius: 50px;
+    overflow: hidden;
+}
+
+.dashboard .content{
+    padding: 5px 10px;
+    width: 80%;
+    max-width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard ul, .dashboard ol, .dashboard li{
+    list-style-type: none;
+    list-style: none;
+    padding: 0;
+}
+
+.dashboard li{
+    padding: 5px;
+}
+
+.dashboard li:hover{
+    background-color: greenyellow;
+    cursor: pointer;
+}
