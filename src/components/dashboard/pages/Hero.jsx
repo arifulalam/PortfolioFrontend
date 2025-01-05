@@ -20,24 +20,11 @@ const Hero = () => {
     fetch();
   }, []);
 
-  useEffect(() => {
-    setTitle(hero != null ? hero.title : '');
-    setSubtitle(hero != null ? hero.subtitle : '');
-    setContent(hero != null ? hero.content : '');
-    setShowSubtitleMark(hero != null ? hero.showSubtitleMark : '');
-    setShowDownloadButton(hero != null ? hero.setShowDownloadButton : '');
-    setId(hero != null ? hero.title : '');
-  });
-
-  //console.log(hero);
-
   const handleHero = (e) => {
     e.preventDefault();
 
     //https://stackoverflow.com/a/67233236
     const data = Object.fromEntries(new FormData(e.target).entries());
-    console.log(data);
-    return;
 
     axios
       .post(api_endpoint, data, {
@@ -63,7 +50,7 @@ const Hero = () => {
               name="title"
               id="title"
               placeholder="Hero Title"
-              value={title}
+              defaultValue={hero != null ? hero.title : title}
               onChange={(e) => setTitle(e.target.value)}
             />
           </div>
@@ -75,7 +62,7 @@ const Hero = () => {
               name="subtitle"
               id="subtitle"
               placeholder="Hero Subtitle"
-              value={subtitle}
+              defaultValue={hero != null ? hero.subtitle : subtitle}
               onChange={(e) => setSubtitle(e.target.value)}
             />
           </div>
@@ -98,7 +85,7 @@ const Hero = () => {
               name="content"
               id="content"
               placeholder="Hero Title"
-              value={content}
+              defaultValue={hero != null ? hero.content : content}
               onChange={(e) => setContent(e.target.value)}
             ></textarea>
           </div>
@@ -111,8 +98,8 @@ const Hero = () => {
                 type="checkbox"
                 name="showSubtitleMark"
                 id="showSubtitleMark"
-                value={showSubtitleMark}
-                onChange={(e) => setShowSubtitleMark(e.target.value)}
+                defaultChecked={showSubtitleMark}
+                onChange={() => setShowSubtitleMark(!showSubtitleMark)}
               />{" "}
               &nbsp; Show Subtitle Marker?
             </label>
@@ -124,8 +111,8 @@ const Hero = () => {
                 type="checkbox"
                 name="showDownloadButton"
                 id="showDownloadButton"
-                value={showDownloadButton}
-                onChange={(e) => setShowDownloadButton(e.target.value)}
+                defaultChecked={showDownloadButton}
+                onChange={() => setShowDownloadButton(!showDownloadButton)}
               />{" "}
               &nbsp; Show Download Button?
             </label>
@@ -133,11 +120,13 @@ const Hero = () => {
         </div>
         <div className="flex flex-row pt-10 gap-5 flex-wrap">
           <div className="flex flex-col w-33">
-            <input type="hidden" value={id} name="id" id="id"/>
-            <button
-              type="submit"
-              className="btn btn-sm btn-orange"
-            >
+            <input
+              type="hidden"
+              defaultValue={hero != null ? hero._id : ""}
+              name="id"
+              id="id"
+            />
+            <button type="submit" className="btn btn-sm btn-orange">
               Save
             </button>
           </div>
